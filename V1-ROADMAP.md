@@ -886,49 +886,6 @@ Create docs/api.md:
 
 ---
 
-## Claude Code Prompts
-
-**Day 1:**
-> "Create a Go + TypeScript monorepo for Vibium. Go module in clicker/, TypeScript in clients/javascript/. Set up npm workspaces. The JS package should export browser (async) and browserSync (sync) objects, both with a launch() stub. Use cobra for the Go CLI."
-
-**Day 2:**
-> "In the Go clicker, implement Chrome for Testing installation. Fetch the latest version from googlechromelabs.github.io/chrome-for-testing, download the correct platform binary + chromedriver, extract to platform-specific cache (Linux: ~/.cache/vibium/, macOS: ~/Library/Caches/vibium/, Windows: %LOCALAPPDATA%\vibium\). Add a 'clicker install' command and a 'clicker launch-test' command."
-
-**Day 3:**
-> "Implement a WebSocket client in Go using gorilla/websocket and BiDi protocol types. Connect to Chrome and send session.status command."
-
-**Day 4:**
-> "Add browsingContext.Navigate and browsingContext.CaptureScreenshot to the BiDi implementation."
-
-**Day 5:**
-> "Implement element finding via script.Evaluate and mouse/keyboard input via input.PerformActions."
-
-**Day 6:**
-> "Create a WebSocket proxy server using gorilla/websocket that launches Chrome on client connect and routes BiDi messages bidirectionally. Use goroutines for concurrent routing."
-
-**Day 7:**
-> "Build the async TypeScript client: binary manager to spawn Clicker, BiDi client over WebSocket, browser.launch() returning a Vibe instance with go(), screenshot(), quit()."
-
-**Day 8:**
-> "Add Element class with click/type/text methods. Add vibe.find(selector). Then create a sync API wrapper (browserSync, VibeSync, ElementSync) using worker threads."
-
-**Day 9:**
-> "Implement auto-waiting: vibe.find() should poll for the element until found or timeout. Default 30s timeout."
-
-**Day 10:**
-> "Add MCP server mode (clicker mcp) with tools: browser_launch, browser_navigate, browser_click, browser_type, browser_screenshot, browser_find, browser_quit."
-
-**Day 11:**
-> "Add proper error types, structured logging with zerolog, and graceful shutdown handling using context.Context for all termination scenarios."
-
-**Day 12-13:**
-> "Set up Go cross-compilation for all platforms (CGO_ENABLED=0). Create npm packages with optionalDependencies pattern. Add postinstall.js that runs 'clicker install' to download Chrome for Testing. Add bin.js that execs 'clicker mcp'. Test with: claude mcp add vibium -- npx -y vibium"
-
-**Day 14:**
-> "Write README with install instructions, quick start examples for async and sync APIs, and MCP setup for Claude Code."
-
----
-
 ## API Summary
 
 ### Async API
