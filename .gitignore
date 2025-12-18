@@ -40,3 +40,6 @@ dist/
 # Clicker binaries
 clicker/bin/
 clicker/clicker
+
+# macOS
+.DS_Store

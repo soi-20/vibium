@@ -1,5 +1,7 @@
 # woah, we're halfway there
 
+![vibium halfway there](../images/vibium-halfway-there.png)
+
 🎸 woah, livin' on a prayer 🎸
 
 day 7 of 14. we're at the midpoint. and things are looking good.
