@@ -92,6 +92,41 @@ claude mcp list
 
 Vibium should no longer appear in the output.
 
+## How Claude Discovers MCP Tools
+
+When Claude Code starts, it connects to each configured MCP server and performs a discovery handshake:
+
+**Step 1: Initialize** - Establish the connection and exchange capabilities
+
+```
+→ {"method": "initialize", "params": {"capabilities": {}}}
+← {"result": {"capabilities": {"tools": {}}, "serverInfo": {"name": "vibium", "version": "0.1.0"}}}
+```
+
+**Step 2: List Tools** - Get available tools with their schemas
+
+```
+→ {"method": "tools/list"}
+← {"result": {"tools": [
+    {"name": "browser_launch", "description": "Launch a new browser session", "inputSchema": {...}},
+    {"name": "browser_navigate", "description": "Navigate to a URL", "inputSchema": {...}},
+    ...
+  ]}}
+```
+
+The `inputSchema` (JSON Schema) tells Claude:
+- What parameters each tool accepts
+- Which parameters are required vs optional
+- Parameter types and descriptions
+
+You can inspect exactly what Claude learns:
+
+```bash
+echo '{"jsonrpc":"2.0","id":1,"method":"tools/list","params":{}}' | ./clicker/bin/clicker mcp | jq .result.tools
+```
+
+**Important:** Tool discovery happens **on startup**. After adding or modifying an MCP server, you must start a new Claude Code session for changes to take effect.
+
 ## Testing the Integration
 
 Once added, start a new Claude Code session and ask Claude to use browser automation:
