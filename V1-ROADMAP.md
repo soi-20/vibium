@@ -762,7 +762,7 @@ Verify before packaging: ✅ 2025-12-21
 
 ---
 
-## Day 12-13: Packaging
+## ✅ Day 12-13: Packaging & npm Publish
 
 ### ✅ Milestone 12.1: Cross-Compile Target
 ```
@@ -891,9 +891,9 @@ claude mcp list
 
 ---
 
-## Day 14: Documentation
+## ✅ Day 14: Documentation
 
-### Milestone 13.1: README
+### ✅ Milestone 13.1: README
 ```
 Update root README.md:
 - Installation: npm install vibium
@@ -903,7 +903,7 @@ Update root README.md:
 - API overview
 ```
 
-### Milestone 13.2: Examples
+### ✅ Milestone 13.2: Tutorials
 ```
 Create examples/:
 
@@ -918,7 +918,7 @@ examples/
     └── README.md (setup instructions)
 ```
 
-### Milestone 13.3: API Reference
+### Milestone 13.3: API Reference (deferred)
 ```
 Create docs/api.md:
 - browser.launch(options)
@@ -936,29 +936,29 @@ Create docs/api.md:
 ## Final Checklist
 
 ### Functionality
-- [ ] browser.launch() works (async)
-- [ ] browserSync.launch() works (sync)
-- [ ] Navigation works
-- [ ] Screenshots captured
-- [ ] Element finding works
-- [ ] Click works
-- [ ] Type works
-- [ ] Auto-wait works
-- [ ] MCP server responds to all tools
-- [ ] Clean shutdown in all scenarios
+- ✅ browser.launch() works (async)
+- ✅ browserSync.launch() works (sync)
+- ✅ Navigation works
+- ✅ Screenshots captured
+- ✅ Element finding works
+- ✅ Click works
+- ✅ Type works
+- ✅ Auto-wait works
+- ✅ MCP server responds to all tools
+- ✅ Clean shutdown in all scenarios
 
 ### Platforms
 - [ ] Linux x64
-- [ ] Linux arm64  
-- [ ] macOS x64
-- [ ] macOS arm64
+- [ ] Linux arm64
+- ✅ macOS x64
+- ✅ macOS arm64
 - [ ] Windows x64
 
 ### Distribution
-- [ ] npm install vibium works
-- [ ] Binary auto-resolves per platform
-- [ ] TypeScript types included
-- [ ] ESM and CJS both work
+- ✅ npm install vibium works
+- ✅ Binary auto-resolves per platform
+- ✅ TypeScript types included
+- ✅ ESM and CJS both work
 
 ---
 
@@ -968,7 +968,7 @@ Create docs/api.md:
 ```typescript
 import { browser } from 'vibium';
 
-const vibe = await browser.launch({ headless: true });
+const vibe = await browser.launch();
 await vibe.go('https://example.com');
 const el = await vibe.find('button.submit');
 await el.click();
@@ -982,7 +982,7 @@ await vibe.quit();
 ```typescript
 import { browserSync } from 'vibium';
 
-const vibe = browserSync.launch({ headless: true });
+const vibe = browserSync.launch();
 vibe.go('https://example.com');
 const el = vibe.find('button.submit');
 el.click();
