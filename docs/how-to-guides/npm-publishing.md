@@ -19,15 +19,7 @@ npm access public @vibium
 ## Build & Package
 
 ```bash
-# 1. Build everything
-make build-all-platforms
-make build-js
-
-# 2. Copy binaries to platform packages
-make package-platforms
-
-# 3. Build main package (when ready - Milestone 12.3)
-make package-main
+make package
 ```
 
 ## Local Testing (Before Publishing)

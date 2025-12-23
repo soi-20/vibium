@@ -1,4 +1,4 @@
-.PHONY: all build build-go build-js build-all-platforms package-platforms package-main deps clean clean-bin clean-js clean-cache clean-all serve test test-cli test-js test-mcp double-tap help
+.PHONY: all build build-go build-js build-all-platforms package package-platforms package-main deps clean clean-bin clean-js clean-packages clean-cache clean-all serve test test-cli test-js test-mcp double-tap help
 
 # Default target
 all: build
@@ -43,6 +43,10 @@ package-main: build-js
 	mkdir -p packages/vibium/dist
 	cp -r clients/javascript/dist/* packages/vibium/dist/
 	@echo "Done. Main package ready at packages/vibium/"
+
+# Build all packages for npm publishing
+package: package-platforms package-main
+	@echo "All packages ready for publishing!"
 
 # Install npm dependencies (skip if node_modules exists)
 deps:
@@ -91,13 +95,18 @@ clean-bin:
 clean-js:
 	rm -rf clients/javascript/dist
 
+# Clean built packages
+clean-packages:
+	rm -f packages/*/bin/clicker packages/*/bin/clicker.exe
+	rm -rf packages/vibium/dist
+
 # Clean cached Chrome for Testing
 clean-cache:
 	rm -rf ~/Library/Caches/vibium/chrome-for-testing
 	rm -rf ~/.cache/vibium/chrome-for-testing
 
-# Clean everything (binaries + JS dist + cache)
-clean-all: clean-bin clean-js clean-cache
+# Clean everything (binaries + JS dist + packages + cache)
+clean-all: clean-bin clean-js clean-packages clean-cache
 
 # Alias for clean-bin + clean-js
 clean: clean-bin clean-js
@@ -109,8 +118,9 @@ help:
 	@echo "  make build-go           - Build clicker binary"
 	@echo "  make build-js           - Build JS client"
 	@echo "  make build-all-platforms - Cross-compile clicker for all platforms"
-	@echo "  make package-platforms  - Copy binaries to npm platform packages"
-	@echo "  make package-main       - Build main vibium package"
+	@echo "  make package            - Build all packages for npm publishing"
+	@echo "  make package-platforms  - Build platform packages only"
+	@echo "  make package-main       - Build main package only"
 	@echo "  make deps               - Install npm dependencies"
 	@echo "  make serve              - Start proxy server on :9515"
 	@echo "  make test               - Run all tests (CLI + JS + MCP)"
@@ -119,6 +129,7 @@ help:
 	@echo "  make test-mcp           - Run MCP server tests only"
 	@echo "  make double-tap         - Kill zombie Chrome/chromedriver processes"
 	@echo "  make clean              - Clean binaries and JS dist"
+	@echo "  make clean-packages     - Clean built packages"
 	@echo "  make clean-cache        - Clean cached Chrome for Testing"
 	@echo "  make clean-all          - Clean everything"
 	@echo "  make help               - Show this help"

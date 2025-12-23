@@ -847,7 +847,7 @@ Update packages/vibium/package.json:
 
 (Code completed in 12.3. Checkpoint merged into 12.5.)
 
-### Milestone 12.5: End-to-End Package Test
+### ✅ Milestone 12.5: End-to-End Package Test
 ```
 Test the full package works after npm install:
 - Clicker binary available
