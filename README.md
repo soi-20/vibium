@@ -26,6 +26,7 @@ Vibium is browser automation infrastructure built for AI agents. A single binary
 |-----------|---------|-----------|
 | **Clicker** | Browser automation, BiDi proxy, MCP server | CLI / stdio / WebSocket :9515 |
 | **JS Client** | Developer-facing API | npm package |
+| **Python Client** | Developer-facing API | pip package |
 
 ---
 
@@ -55,8 +56,8 @@ Vibium is browser automation infrastructure built for AI agents. A single binary
                       │ WebSocket BiDi :9515
                       ▼
 ┌─────────────────────────────────────────────────────────────┐
-│                        JS/TS Client                         │
-│                     npm install vibium                      │
+│                       Client Libraries                       │
+│           npm install vibium  ·  pip install vibium          │
 │                                                             │
 │    ┌─────────────────┐               ┌─────────────────┐    │
 │    │ Async API       │               │    Sync API     │    │
@@ -127,6 +128,48 @@ await link.click()
 await vibe.quit()
 ```
 
+### Python Client
+
+```python
+from vibium import browser, browser_sync
+```
+
+**Sync API:**
+```python
+from vibium import browser_sync as browser
+
+vibe = browser.launch()
+vibe.go("https://example.com")
+
+png = vibe.screenshot()
+with open("screenshot.png", "wb") as f:
+    f.write(png)
+
+link = vibe.find("a")
+link.click()
+vibe.quit()
+```
+
+**Async API:**
+```python
+import asyncio
+from vibium import browser
+
+async def main():
+    vibe = await browser.launch()
+    await vibe.go("https://example.com")
+
+    png = await vibe.screenshot()
+    with open("screenshot.png", "wb") as f:
+        f.write(png)
+
+    link = await vibe.find("a")
+    await link.click()
+    await vibe.quit()
+
+asyncio.run(main())
+```
+
 ---
 
 ## For Agents
@@ -154,7 +197,8 @@ That's it. No manual steps needed. Chrome downloads automatically during setup.
 ## For Humans
 
 ```bash
-npm install vibium
+npm install vibium   # JavaScript/TypeScript
+pip install vibium   # Python
 ```
 
 This automatically:
@@ -216,7 +260,7 @@ See [CONTRIBUTING.md](CONTRIBUTING.md) for development setup and guidelines.
 V1 focuses on the core loop: browser control via MCP and JS client.
 
 See [V2-ROADMAP.md](V2-ROADMAP.md) for planned features:
-- Python and Java clients
+- Java client
 - Cortex (memory/navigation layer)
 - Retina (recording extension)
 - Video recording
